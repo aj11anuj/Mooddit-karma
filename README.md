@@ -4,73 +4,89 @@ Mooddit Karma is a terminal-based sentiment analysis tool that allows users to f
 
 ## Features
 
-- Fetch posts from any subreddit using Reddit's API
-- Perform sentiment analysis (Positive, Negative, Neutral)
+- Fetch live posts from any subreddit using Reddit's API
+- Perform sentiment analysis using Vader
 - Store and manage data using MongoDB
-- Visualize sentiment distribution in the terminal using progress bars
+- Terminal-based KPI and progress bar visualization
+
+## File Overview
+
+  | File              | Description                                      |
+  |-------------------|--------------------------------------------------|
+  | `main.py`         | Master script to run all modules sequentially    |
+  | `fetch_reddit.py` | Fetches posts from a subreddit and saves to DB   |
+  | `analyze.py`      | Performs sentiment analysis on the posts         |
+  | `senti_count.py`  | Shows the count of each sentiment type           |
+  | `visuals.py`      | Displays colored terminal bars for sentiment     |
+  | `wipe.py`         | Clears previous post data from MongoDB           |
 
 ## Requirements
 
 - Python 3.8+
 - [MongoDB](https://www.mongodb.com/)
 - Reddit API credentials via [Reddit App](https://www.reddit.com/prefs/apps)
-- PRAW (`pip install praw`)
-- rich (`pip install rich`)
+- PRAW (`pip install praw`) - Reddit's API
+- rich (`pip install rich`) - Some UI based functionalities
 
-## Project Structure
-
-```bash
-Mooddit_Karma/
-├── senti_count.py       # Sentiment analysis logic + visualization
-├── fetch_data.py        # Script to fetch Reddit posts & store in MongoDB
-├── clear_db.py          # Clears the MongoDB database (for fresh runs)
-└── README.md            # You’re reading this!
-```
-<!--
 ## How to Use
 
-### 1. Clone the repo
-```bash
-git clone https://github.com/yourusername/Mooddit_Karma.git
-cd Mooddit_Karma
-```
+- ### Clone the repository
+    ```bash
+    git clone https://github.com/yourusername/Mooddit_Karma.git
+    cd Mooddit_Karma
+    ```
 
-### 2. Install dependencies
-```bash
-pip install -r requirements.txt
-```
+- ### Install dependencies
+    ```bash
+    pip install pymongo praw vaderSentiment rich
+    ```
 
-### 3. Configure Reddit API
-Edit the `fetch_data.py` file and insert your credentials:
+- ### Setup MongoDB
+  - Ensure MongoDB is installed and running on your system at the default port `27017`.
 
-```python
-reddit = praw.Reddit(
+- ### Reddit's API Setup
+  - Go to [Reddit App Preferences](https://www.reddit.com/prefs/apps).
+  - Click **“Create App”** > **“script”**
+  - Set `client_id`, `client_secret`, and `user_agent` in `fetch_reddit.py`:
+    ```python
+    reddit = praw.Reddit(
     client_id='YOUR_CLIENT_ID',
     client_secret='YOUR_SECRET',
-    user_agent='YOUR_USER_AGENT'
-)
-```
+    user_agent='MoodditKarmaBot/0.1 by YOUR_USERNAME'
+    )
+    ```
 
-### 4. Run the script
-```bash
-python fetch_data.py
-```
-- You’ll be prompted to enter the subreddit and number of posts.
-- Data is saved in MongoDB.
+- ### Usage
+  - Once setup is done, just run:
+    ```bash
+    python main.py
+    ```
 
-### 5. Analyze Sentiment
-```bash
-python senti_count.py
-```
-- The script will analyze the freshly fetched posts and print visual sentiment stats in your terminal.
--->
 ## Sample Output
 
 ```bash
--> Fetched and stored 30 posts from r/technology
-
-Sentiment Distribution:
-Positive ━━━━━━━━━━━━━━ 40%
-Negative ━━━━━━━━━━━━ 35%
-Neutral ━━━━━━━ 25%
+Cleaning the database...
+-> Cleared 30 documents from the database
+-> It will now perform analysis on fresh real-time data only
+    
+Fetching Reddit posts...
+-> Enter the subreddit name: technology
+-> Enter the number of posts you want to fetch: 50
+-> Fetched and stored 50 posts from r/technology
+    
+Performing Sentiment Analysis...
+-> Sentiment analysis completed and updated in MongoDB!
+    
+KPI for the data...
+-> Sentiment Frequency:
+  -> Positive: 22
+  -> Neutral: 17
+  -> Negative: 11
+    
+Visualization...
+  Positive ━━━━━━━━━━━━━━ 40%
+  Negative ━━━━━━━━━━━━ 35%
+  Neutral ━━━━━━━ 25%
+    
+All tasks completed!
 ```
