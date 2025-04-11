@@ -9,9 +9,9 @@ db = client["MoodditKarma"]
 collection = db["posts"]
 
 # Reddit API setup
-reddit = praw.Reddit(client_id='_xMS4Og8V_7Qet6BSeY3Iw',
-                      client_secret='mnx557x775kZcQwfMi6WAq1yR89Y_A',
-                      user_agent='MoodditKarmaBot/0.1 by EcstaticChance3728')
+reddit = praw.Reddit(client_id='',
+                      client_secret='',
+                      user_agent='')
 
 # Get user input for subreddit and number of posts
 subreddit_name = input("-> Enter the subreddit name: ").strip()
