@@ -32,7 +32,7 @@ Mooddit Karma is a terminal-based sentiment analysis tool that allows users to f
 
 - ### Clone the repository
     ```bash
-    git clone https://github.com/yourusername/Mooddit_Karma.git
+    git clone https://github.com/aj11anuj/Mooddit-Karma.git
     cd Mooddit_Karma
     ```
 
