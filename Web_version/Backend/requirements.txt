@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+asyncpraw
+vaderSentiment
+numpy
+pandas
