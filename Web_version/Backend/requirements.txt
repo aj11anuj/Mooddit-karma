@@ -4,3 +4,4 @@ asyncpraw
 vaderSentiment
 numpy
 pandas
+python-dotenv
